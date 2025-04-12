@@ -1,13 +1,121 @@
-h1{
-    color: red;
-    font-size: 20px;
+/* Estilos generales */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-image: linear-gradient(to right, #f5f5f5, #e0e0e0);
+    color: #333;
 }
 
-p{
-    color:darkblue;
+/* Estilos del encabezado */
+header {
+    border: 2px solid #4a90e2;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: white;
+    overflow: hidden;
 }
 
-#Segundo{
-    color:green;
-    font-family: "Courier New", Courier, monospace;
+h1 {
+    color: #4a90e2;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Estilos de navegación */
+nav {
+    width: 100%;
+    height: auto;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #4a90e2;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent;
+}
+
+nav a:hover {
+    border-bottom: 2px solid #4a90e2;
+}
+
+/* Estilos del contenido principal */
+main {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border-left: 4px solid #4a90e2;
+}
+
+h2 {
+    color: #2c3e50;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+p {
+    color: #2c3e50;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+/* Estilos de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+}
+
+/* Estilos del pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    border-top: 1px solid #ddd;
+    font-style: italic;
+    color: #666;
 }
