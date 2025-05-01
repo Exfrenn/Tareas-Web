@@ -1,0 +1,126 @@
+*{
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    background-color: #1A1A1A;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+#headerContainer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+h1 {
+    color: #FFFFFF;
+    font-size: 48px;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+canvas {
+    background-color: #1A1A1A;
+    border: 2px solid #2C3E50;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#backButton {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2C3E50;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover {
+    background-color: #34495E;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+#canvas {
+  background-color: #87ceeb;
+  grid-area: main;
+}
+
+.lil-gui.autoPlace{
+  top: 15vh;
+  right: 5vw;
+}
+
+#uiContainer {
+  position: absolute;
+  top: 15vh;
+  right: 5vw;
+  z-index: 3;
+  font-family: monospace;
+  pointer-events: none;
+  padding: 1em;
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 1em;
+  border: 1px solid turquoise;
+
+  text-shadow:
+   -1px -1px 0 #FFF,
+    1px -1px 0 #FFF,
+    -1px 1px 0 #FFF,
+     1px 1px 0 #FFF;
+}
+#ui {
+  opacity: 0.8;
+}
+#ui>div {
+  pointer-events: none;
+}
+#ui input, #ui select, #ui option, #ui canvas {
+  pointer-events: auto;
+}
+
+#buttonContainer {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#backButton, #nextLevelButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #2C3E50;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#backButton:hover, #nextLevelButton:hover {
+    background-color: #34495E;
+}
+
+#nextLevelButton {
+    background-color: #27AE60;
+}
+
+#nextLevelButton:hover {
+    background-color: #2ECC71;
+}
+
+#nextLevelButton:disabled {
+    background-color: #7F8C8D;
+    cursor: not-allowed;
+}
