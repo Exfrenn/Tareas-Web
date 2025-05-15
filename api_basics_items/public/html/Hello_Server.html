@@ -1,15 +1,113 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pruebas y documentación de api">
+    <title>Pruebas y documentación de API</title>
     <link rel="stylesheet" href="../css/style.css">
-    <script src="../js/hello_server.js"></script>
-    <title>Hello Server</title>
 </head>
-<header>
-    <h1>Hello Server</h1>
-</header>
 <body>
+    <header class="header">
+        <h1>Pruebas y documentación de API</h1>
+    </header>
+
+    <main class="main-grid">
+        <section class="doc">
+            <h2>Documentación de Endpoints</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Método</th>
+                            <th>Ruta</th>
+                            <th>Descripción</th>
+                            <th>Body (JSON)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td>/</td>
+                            <td>Cargar esta página</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/items</td>
+                            <td>Listar todos los ninjutsus</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/api/items</td>
+                            <td>Crear un ninjutsu</td>
+                            <td><code>{"name":"shuriken","type":"arma","effect":"+5"}</code></td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/items/:id</td>
+                            <td>Obtener ninjutsu por ID</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td>/api/items/:id</td>
+                            <td>Actualizar ninjutsu</td>
+                            <td><code>{"effect":"+10 daño"}</code></td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>/api/items/:id</td>
+                            <td>Eliminar ninjutsu</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/users</td>
+                            <td>Listar ninjas (+ninjutsus)</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/api/users</td>
+                            <td>Crear un ninja</td>
+                            <td><code>{"name":"Shisui","email":"shisui@uchiha.com","items":[1]}</code></td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/users/:id</td>
+                            <td>Obtener ninja por ID</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td>/api/users/:id</td>
+                            <td>Actualizar ninja</td>
+                            <td><code>{"name":"Nuevo Nombre"}</code></td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>/api/users/:id</td>
+                            <td>Eliminar ninja</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="tests">
+            <h2>Pruebas Automáticas</h2>
+            <p>Al cargar esta página, el script ejecuta automáticamente pruebas <code>fetch</code> contra cada endpoint y registra el estado y la respuesta en la consola del navegador.</p>
+            <p>Para ver los resultados, abre las herramientas de desarrollo del navegador (F12) y consulta la consola.</p>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>API|Node.js|Express|Fetch API</p>
+    </footer>
+
+    <script src="../js/hello_server.js"></script>
 </body>
 </html>

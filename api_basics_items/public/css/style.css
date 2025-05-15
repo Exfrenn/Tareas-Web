@@ -1,23 +1,156 @@
-body{
-    background-color: rgb(171, 178, 175);
-    margin: 0;
-    padding: 0;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: rgb(171, 178, 175);
-    text-align: center;
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background: #f5f1e6;
+  color: #2c1810;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+  line-height: 1.6;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d4c4b7' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E");
 }
 
+.header,
+.footer {
+  background: #2c1810;
+  padding: 1.5rem;
+  text-align: center;
+  border-bottom: 2px solid #8b0000;
+  color: #f5f1e6;
+  position: relative;
+}
 
-header {
-    background-color: #436175;
-    color: white;
-    text-align: center;
-    font-size: 2em;
-    height: 20vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.header::before,
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #2c1810, #8b0000, #2c1810);
+}
+
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}
+
+.doc,
+.tests {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem;
+  border: 2px solid #2c1810;
+  border-radius: 4px;
+  box-shadow: 4px 4px 0 #2c1810;
+  position: relative;
+}
+
+.doc::before,
+.tests::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  border: 1px solid #8b0000;
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+h1, h2 {
+  color: #2c1810;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  text-shadow: 1px 1px 0 #f5f1e6;
+}
+
+h1 {
+  font-size: 2rem;
+  letter-spacing: 0.1em;
+  color: #f5f1e6;
+}
+
+h2 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid #8b0000;
+  padding-bottom: 0.5rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  border: 2px solid #2c1810;
+  border-radius: 4px;
+  background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+thead {
+  background: #2c1810;
+  color: #f5f1e6;
+}
+
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border: 1px solid #2c1810;
+}
+
+th {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(44, 24, 16, 0.05);
+}
+
+tbody tr:hover {
+  background: rgba(44, 24, 16, 0.1);
+}
+
+code {
+  background: #2c1810;
+  color: #f5f1e6;
+  padding: 0.2rem 0.4rem;
+  border-radius: 2px;
+  font-family: 'Noto Sans Mono', monospace;
+  font-size: 0.9em;
+}
+
+.footer {
+  border-top: 2px solid #8b0000;
+  border-bottom: none;
+}
+
+.footer p {
+  font-size: 0.875rem;
+  color: #f5f1e6;
+  letter-spacing: 0.05em;
 }
