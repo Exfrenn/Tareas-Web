@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pruebas y documentación de api">
+    <title>Pruebas y documentación de API</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1>Pruebas y documentación de API</h1>
+    </header>
+
+    <main class="main-grid">
+        <section class="doc">
+            <h2>Documentación de Endpoints</h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Método</th>
+                            <th>Ruta</th>
+                            <th>Descripción</th>
+                            <th>Body (JSON)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GET</td>
+                            <td>/</td>
+                            <td>Cargar esta página</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/items</td>
+                            <td>Listar todos los items</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/api/items</td>
+                            <td>Crear un item</td>
+                            <td><code>{"name":"shuriken","type":"arma","effect":"+5"}</code></td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/items/:id</td>
+                            <td>Obtener item por ID</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td>/api/items/:id</td>
+                            <td>Actualizar item</td>
+                            <td><code>{"effect":"+10 daño"}</code></td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>/api/items/:id</td>
+                            <td>Eliminar item</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/users</td>
+                            <td>Listar usuarios (+items)</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>POST</td>
+                            <td>/api/users</td>
+                            <td>Crear un usuario</td>
+                            <td><code>{"name":"Shisui","email":"shisui@uchiha.com","items":[1]}</code></td>
+                        </tr>
+                        <tr>
+                            <td>GET</td>
+                            <td>/api/users/:id</td>
+                            <td>Obtener usuario por ID</td>
+                            <td>—</td>
+                        </tr>
+                        <tr>
+                            <td>PUT</td>
+                            <td>/api/users/:id</td>
+                            <td>Actualizar usuario</td>
+                            <td><code>{"name":"Nuevo Nombre"}</code></td>
+                        </tr>
+                        <tr>
+                            <td>DELETE</td>
+                            <td>/api/users/:id</td>
+                            <td>Eliminar usuario</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="forms">
+            <h2>Gestión de Items</h2>
+            
+            <div class="crud-buttons">
+                <button id="getAllItems" class="btn-crud get">Obtener Todos los Items</button>
+            </div>
+
+            <h3>Crear Nuevo Item</h3>
+            <form id="createItemForm" class="api-form">
+                <div class="form-group">
+                    <label for="itemName">Nombre:</label>
+                    <input type="text" id="itemName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemType">Tipo:</label>
+                    <input type="text" id="itemType" name="type" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemEffect">Efecto:</label>
+                    <input type="text" id="itemEffect" name="effect" required>
+                </div>
+                <button type="submit" class="btn-submit">Crear Item</button>
+            </form>
+
+            <h3>Crear Múltiples Items</h3>
+            <form id="createMultipleItemsForm" class="api-form">
+                <div class="form-group">
+                    <label for="itemsJson">Items (JSON):</label>
+                    <textarea id="itemsJson" name="items" rows="4" required placeholder='[{"name":"item1","type":"tipo1","effect":"efecto1"},{"name":"item2","type":"tipo2","effect":"efecto2"}]'></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Crear Items</button>
+            </form>
+
+            <h3>Buscar Item</h3>
+            <form id="getItemForm" class="api-form">
+                <div class="form-group">
+                    <label for="itemId">ID del Item (dejar vacío para ver todos):</label>
+                    <input type="number" id="itemId" name="id" min="1">
+                </div>
+                <button type="submit" class="btn-submit">Buscar Item(s)</button>
+            </form>
+
+            <h3>Actualizar Item</h3>
+            <form id="updateItemForm" class="api-form">
+                <div class="form-group">
+                    <label for="updateItemId">ID del Item:</label>
+                    <input type="number" id="updateItemId" name="id" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="updateItemName">Nuevo Nombre (opcional):</label>
+                    <input type="text" id="updateItemName" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="updateItemType">Nuevo Tipo (opcional):</label>
+                    <input type="text" id="updateItemType" name="type">
+                </div>
+                <div class="form-group">
+                    <label for="updateItemEffect">Nuevo Efecto (opcional):</label>
+                    <input type="text" id="updateItemEffect" name="effect">
+                </div>
+                <button type="submit" class="btn-submit">Actualizar Item</button>
+            </form>
+
+            <h3>Eliminar Item</h3>
+            <form id="deleteItemForm" class="api-form">
+                <div class="form-group">
+                    <label for="deleteItemId">ID del Item:</label>
+                    <input type="number" id="deleteItemId" name="id" required min="1">
+                </div>
+                <button type="submit" class="btn-submit delete">Eliminar Item</button>
+            </form>
+
+            <h2>Gestión de Usuarios</h2>
+
+            <div class="crud-buttons">
+                <button id="getAllUsers" class="btn-crud get">Obtener Todos los Usuarios</button>
+            </div>
+
+            <h3>Crear Nuevo Usuario</h3>
+            <form id="createUserForm" class="api-form">
+                <div class="form-group">
+                    <label for="userName">Nombre:</label>
+                    <input type="text" id="userName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="userEmail">Email:</label>
+                    <input type="email" id="userEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="userItems">IDs de Items (separados por coma):</label>
+                    <input type="text" id="userItems" name="items" placeholder="1,2,3">
+                </div>
+                <button type="submit" class="btn-submit">Crear Usuario</button>
+            </form>
+
+            <h3>Crear Múltiples Usuarios</h3>
+            <form id="createMultipleUsersForm" class="api-form">
+                <div class="form-group">
+                    <label for="usersJson">Usuarios (JSON):</label>
+                    <textarea id="usersJson" name="users" rows="4" required placeholder='[{"name":"usuario1","email":"email1@ejemplo.com","items":[1,2]},{"name":"usuario2","email":"email2@ejemplo.com","items":[3]}]'></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Crear Usuarios</button>
+            </form>
+
+            <h3>Buscar Usuario</h3>
+            <form id="getUserForm" class="api-form">
+                <div class="form-group">
+                    <label for="userId">ID del Usuario (dejar vacío para ver todos):</label>
+                    <input type="number" id="userId" name="id" min="1">
+                </div>
+                <button type="submit" class="btn-submit">Buscar Usuario(s)</button>
+            </form>
+
+            <h3>Actualizar Usuario</h3>
+            <form id="updateUserForm" class="api-form">
+                <div class="form-group">
+                    <label for="updateUserId">ID del Usuario:</label>
+                    <input type="number" id="updateUserId" name="id" required min="1">
+                </div>
+                <div class="form-group">
+                    <label for="updateUserName">Nuevo Nombre (opcional):</label>
+                    <input type="text" id="updateUserName" name="name">
+                </div>
+                <div class="form-group">
+                    <label for="updateUserEmail">Nuevo Email (opcional):</label>
+                    <input type="email" id="updateUserEmail" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="updateUserItems">Nuevos IDs de Items (opcional, separados por coma):</label>
+                    <input type="text" id="updateUserItems" name="items" placeholder="1,2,3">
+                </div>
+                <button type="submit" class="btn-submit">Actualizar Usuario</button>
+            </form>
+
+            <h3>Eliminar Usuario</h3>
+            <form id="deleteUserForm" class="api-form">
+                <div class="form-group">
+                    <label for="deleteUserId">ID del Usuario:</label>
+                    <input type="number" id="deleteUserId" name="id" required min="1">
+                </div>
+                <button type="submit" class="btn-submit delete">Eliminar Usuario</button>
+            </form>
+
+            <div id="responseMessage" class="response-message"></div>
+            <div id="resultsList" class="results-list"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>API|Node.js|Express|Fetch API</p>
+    </footer>
+
+    <script src="../js/hello_server.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Elementos del DOM
+            const forms = {
+                items: {
+                    create: document.getElementById('createItemForm'),
+                    createMultiple: document.getElementById('createMultipleItemsForm'),
+                    get: document.getElementById('getItemForm'),
+                    update: document.getElementById('updateItemForm'),
+                    delete: document.getElementById('deleteItemForm')
+                },
+                users: {
+                    create: document.getElementById('createUserForm'),
+                    createMultiple: document.getElementById('createMultipleUsersForm'),
+                    get: document.getElementById('getUserForm'),
+                    update: document.getElementById('updateUserForm'),
+                    delete: document.getElementById('deleteUserForm')
+                }
+            };
+
+            const buttons = {
+                getAllItems: document.getElementById('getAllItems'),
+                getAllUsers: document.getElementById('getAllUsers')
+            };
+
+            const responseMessage = document.getElementById('responseMessage');
+            const resultsList = document.getElementById('resultsList');
+
+            // Función auxiliar para mostrar mensajes
+            const showMessage = (message, isError = false) => {
+                responseMessage.textContent = message;
+                responseMessage.className = `response-message ${isError ? 'error' : 'success'}`;
+            };
+
+            // Función auxiliar para mostrar resultados
+            const showResults = (data) => {
+                if (!data || (Array.isArray(data) && data.length === 0)) {
+                    resultsList.innerHTML = '<p class="no-results">No se encontraron resultados</p>';
+                    return;
+                }
+
+                const items = Array.isArray(data) ? data : [data];
+                resultsList.innerHTML = items.map(item => {
+                    if (item.items) {
+                        // Es un usuario
+                        return `
+                            <div class="result-item">
+                                <h4>Usuario: ${item.name}</h4>
+                                <p>Email: ${item.email}</p>
+                                <p>ID: ${item.id}</p>
+                                <h5>Items:</h5>
+                                <ul>
+                                    ${item.items.map(item => `
+                                        <li>
+                                            ${item.name} (${item.type}) - ${item.effect}
+                                        </li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        `;
+                    } else {
+                        // Es un item
+                        return `
+                            <div class="result-item">
+                                <h4>Item: ${item.name}</h4>
+                                <p>Tipo: ${item.type}</p>
+                                <p>Efecto: ${item.effect}</p>
+                                <p>ID: ${item.id}</p>
+                            </div>
+                        `;
+                    }
+                }).join('');
+            };
+
+            // Event Listeners para Items
+            buttons.getAllItems.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/api/items');
+                    const data = await response.json();
+                    showResults(data);
+                    showMessage('Items obtenidos exitosamente');
+                } catch (error) {
+                    showMessage(`Error al obtener items: ${error.message}`, true);
+                }
+            });
+
+            forms.items.create.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(forms.items.create);
+                const itemData = {
+                    name: formData.get('name'),
+                    type: formData.get('type'),
+                    effect: formData.get('effect')
+                };
+
+                try {
+                    const response = await fetch('/api/items', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(itemData)
+                    });
+
+                    const data = await response.json();
+                    showMessage('Item creado exitosamente');
+                    showResults(data);
+                    forms.items.create.reset();
+                } catch (error) {
+                    showMessage(`Error al crear el item: ${error.message}`, true);
+                }
+            });
+
+            forms.items.createMultiple.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const itemsJson = document.getElementById('itemsJson').value;
+                
+                try {
+                    const items = JSON.parse(itemsJson);
+                    const response = await fetch('/api/items', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(items)
+                    });
+
+                    const data = await response.json();
+                    showMessage('Items creados exitosamente');
+                    showResults(data);
+                    forms.items.createMultiple.reset();
+                } catch (error) {
+                    showMessage(`Error al crear los items: ${error.message}`, true);
+                }
+            });
+
+            forms.items.get.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const itemId = document.getElementById('itemId').value;
+                const url = itemId ? `/api/items/${itemId}` : '/api/items';
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    showResults(data);
+                    showMessage('Búsqueda completada exitosamente');
+                } catch (error) {
+                    showMessage(`Error al buscar items: ${error.message}`, true);
+                }
+            });
+
+            forms.items.update.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(forms.items.update);
+                const itemId = formData.get('id');
+                const updateData = {};
+
+                if (formData.get('name')) updateData.name = formData.get('name');
+                if (formData.get('type')) updateData.type = formData.get('type');
+                if (formData.get('effect')) updateData.effect = formData.get('effect');
+
+                try {
+                    const response = await fetch(`/api/items/${itemId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updateData)
+                    });
+
+                    const data = await response.json();
+                    showMessage('Item actualizado exitosamente');
+                    showResults(data);
+                    forms.items.update.reset();
+                } catch (error) {
+                    showMessage(`Error al actualizar el item: ${error.message}`, true);
+                }
+            });
+
+            forms.items.delete.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const itemId = document.getElementById('deleteItemId').value;
+
+                try {
+                    const response = await fetch(`/api/items/${itemId}`, {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+                    showMessage('Item eliminado exitosamente');
+                    showResults(data);
+                    forms.items.delete.reset();
+                } catch (error) {
+                    showMessage(`Error al eliminar el item: ${error.message}`, true);
+                }
+            });
+
+            // Event Listeners para Usuarios
+            buttons.getAllUsers.addEventListener('click', async () => {
+                try {
+                    const response = await fetch('/api/users');
+                    const data = await response.json();
+                    showResults(data);
+                    showMessage('Usuarios obtenidos exitosamente');
+                } catch (error) {
+                    showMessage(`Error al obtener usuarios: ${error.message}`, true);
+                }
+            });
+
+            forms.users.create.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(forms.users.create);
+                const itemsStr = formData.get('items');
+                const items = itemsStr ? itemsStr.split(',').map(id => parseInt(id.trim())) : [];
+
+                const userData = {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    items: items
+                };
+
+                try {
+                    const response = await fetch('/api/users', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(userData)
+                    });
+
+                    const data = await response.json();
+                    showMessage('Usuario creado exitosamente');
+                    showResults(data);
+                    forms.users.create.reset();
+                } catch (error) {
+                    showMessage(`Error al crear el usuario: ${error.message}`, true);
+                }
+            });
+
+            forms.users.createMultiple.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const usersJson = document.getElementById('usersJson').value;
+                
+                try {
+                    const users = JSON.parse(usersJson);
+                    const response = await fetch('/api/users', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(users)
+                    });
+
+                    const data = await response.json();
+                    showMessage('Usuarios creados exitosamente');
+                    showResults(data);
+                    forms.users.createMultiple.reset();
+                } catch (error) {
+                    showMessage(`Error al crear los usuarios: ${error.message}`, true);
+                }
+            });
+
+            forms.users.get.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userId = document.getElementById('userId').value;
+                const url = userId ? `/api/users/${userId}` : '/api/users';
+
+                try {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    showResults(data);
+                    showMessage('Búsqueda completada exitosamente');
+                } catch (error) {
+                    showMessage(`Error al buscar usuarios: ${error.message}`, true);
+                }
+            });
+
+            forms.users.update.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(forms.users.update);
+                const userId = formData.get('id');
+                const updateData = {};
+
+                if (formData.get('name')) updateData.name = formData.get('name');
+                if (formData.get('email')) updateData.email = formData.get('email');
+                if (formData.get('items')) {
+                    updateData.items = formData.get('items')
+                        .split(',')
+                        .map(id => parseInt(id.trim()));
+                }
+
+                try {
+                    const response = await fetch(`/api/users/${userId}`, {
+                        method: 'PUT',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(updateData)
+                    });
+
+                    const data = await response.json();
+                    showMessage('Usuario actualizado exitosamente');
+                    showResults(data);
+                    forms.users.update.reset();
+                } catch (error) {
+                    showMessage(`Error al actualizar el usuario: ${error.message}`, true);
+                }
+            });
+
+            forms.users.delete.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const userId = document.getElementById('deleteUserId').value;
+
+                try {
+                    const response = await fetch(`/api/users/${userId}`, {
+                        method: 'DELETE'
+                    });
+
+                    const data = await response.json();
+                    showMessage('Usuario eliminado exitosamente');
+                    showResults(data);
+                    forms.users.delete.reset();
+                } catch (error) {
+                    showMessage(`Error al eliminar el usuario: ${error.message}`, true);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
